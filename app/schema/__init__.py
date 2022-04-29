@@ -1,0 +1,1 @@
+from app.schema.img_frame import ImageFrame
