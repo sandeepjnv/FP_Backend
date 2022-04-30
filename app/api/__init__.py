@@ -1,3 +1,4 @@
 from flask_restplus import Api
 
-from .image_frame import ImageFrame
+from app.api.raspberry_module import ImageFrame
+from app.api.raspberry_module import LocationUpdate

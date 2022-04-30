@@ -1,0 +1,1 @@
+from image_frame import image_frame_to_seat_map
