@@ -1,1 +1,1 @@
-from app.schema.img_frame import ImageFrame
+from app.schema.raspberry_module import RaspberryModuleAPIs
