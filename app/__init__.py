@@ -26,11 +26,19 @@ dct_namespaces = []
 for controller in glob('**/api/*.py', recursive=True):
     if controller.endswith('__init__.py'):
         continue
-    str_module_path = '.'.join(controller[:-3].split('/'))
+    import os
+    if os.name == "nt":
+        str_module_path = '.'.join(controller[:-3].split('\\'))
+    elif os.name == "posix":
+        str_module_path = '.'.join(controller[:-3].split('/'))
     try:
         dct_auth = ins_api.authorizations
         ins_module = import_module(str_module_path)
 
-        ins_api.add_namespace(ins_module.ins_namespace,path ='/' +controller[:-3].split('/')[2])
+        if os.name == "nt":
+            ins_api.add_namespace(ins_module.ins_namespace,path ='/' +controller[:-3].split('\\')[2])
+        elif os.name == "posix":
+            ins_api.add_namespace(ins_module.ins_namespace,path ='/' +controller[:-3].split('/')[2])
+        
     except Exception as str_error:
         print(str_error)
