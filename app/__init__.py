@@ -14,7 +14,7 @@ class Config:
 class DevelopmentConfig(Config):
     ENV = 'development'
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'postgresql://' + 'admin' + ':' + 'admin' + '@' + 'localhost' + '/' + 'basn'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://' + 'postgres' + ':' + 'admin' + '@' + 'localhost' + '/' + 'BASN'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 def create_app(str_config_name):
