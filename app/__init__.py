@@ -6,10 +6,22 @@ from flask_restplus import Api
 # from flask_sqlalchemy import SQLAlchemy
 # ins_db = SQLAlchemy()
 
+class Config:
+    SECRET_KEY = ins_cfg.get('default', 'secret_key')
+    DEBUG = False
+    SQLALCHEMY_POOL_TIMEOUT = 600
+    SQLALCHEMY_POOL_RECYCLE1 = 300
+    SQLALCHEMY_MAX_OVERFLOW = 10
+class DevelopmentConfig(Config):
+    ENV = 'development'
+    DEBUG = True
+    SQLALCHEMY_DATABASE_URI = 'postgresql://' + 'admin' + ':' + 'admin' + '@' + 'localhost' + '/' + 'basn'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 def create_app(str_config_name):
     ins_app = Flask(__name__)
-    # ins_db.init_app(ins_app)
+    ins_app.config.from_object(dict(DevelopmentConfig))
+    ins_db.init_app(ins_app)
     ins_app.register_blueprint(ins_blueprint)
     ins_app.app_context().push()
     return ins_app
