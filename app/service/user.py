@@ -2,11 +2,11 @@ from app import ins_db
 from app.model import User
 
 def user_login(request):
-    dct_request = request.json()
+    dct_request = request.json
     try:
         ins_user = User.query.filter_by(
-            vchr_username=request.get("str_username"),
-            vchr_password = request
+            vchr_username=dct_request.get("str_username"),
+            vchr_password = dct_request.get("str_password")
         ).first().get()  
         
         if ins_user:

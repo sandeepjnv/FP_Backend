@@ -3,11 +3,10 @@ from importlib import import_module
 
 from flask import Blueprint, Flask
 from flask_restplus import Api
-# from flask_sqlalchemy import SQLAlchemy
-# ins_db = SQLAlchemy()
+from flask_sqlalchemy import SQLAlchemy
+ins_db = SQLAlchemy()
 
 class Config:
-    SECRET_KEY = ins_cfg.get('default', 'secret_key')
     DEBUG = False
     SQLALCHEMY_POOL_TIMEOUT = 600
     SQLALCHEMY_POOL_RECYCLE1 = 300
@@ -20,7 +19,7 @@ class DevelopmentConfig(Config):
 
 def create_app(str_config_name):
     ins_app = Flask(__name__)
-    ins_app.config.from_object(dict(DevelopmentConfig))
+    ins_app.config.from_object(DevelopmentConfig)
     ins_db.init_app(ins_app)
     ins_app.register_blueprint(ins_blueprint)
     ins_app.app_context().push()
