@@ -18,6 +18,7 @@ class ImageFrame(Resource):
     @ins_namespace.doc('Upload new image frame')
     def post(self):
         """Upload base64 encoded Image frame""" 
+        # return ""
         return image_frame_to_seat_map(request)
         
 @ins_namespace.route('/location')
