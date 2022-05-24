@@ -3,6 +3,7 @@ import cv2
 import argparse
 import numpy as np
 import base64
+from app.model import SeatMap
 
 
 def image_frame_to_seat_map(request):
@@ -112,7 +113,14 @@ def image_frame_to_seat_map(request):
         cv2.destroyAllWindows()
 
         # update seat map to DB
-        
+        vehicle = SeatMap.query.filter_by(pk_bint_vechicle_id=str_vehicle_id).first()
+        if vehicle:
+            vehicle.json_seat_map = json.dumps(objSeatMap)
+            save_changes(vehicle)
+
+            return json.dumps({"status":"success"})
+        else:
+            return json.dumps({"status":"fail","message":"No vehicle with this ID is found"})
 
 
     except Exception as e:
@@ -127,3 +135,7 @@ def get_output_layers(net):
     # if python <=3.7 uncomment this 
     # output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
     return output_layers
+
+def save_changes(data):
+    db.session.add(data)
+    db.session.commit()
