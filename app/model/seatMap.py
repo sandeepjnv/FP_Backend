@@ -6,6 +6,7 @@ class SeatMap(ins_db.Model):
 
     pk_bint_vechicle_id = ins_db.Column(ins_db.BigInteger, primary_key=True, autoincrement=True)
     json_seat_map = ins_db.Column(ins_db.JSON, nullable=True)
+    vchr_username = ins_db.Column(ins_db.String, nullable= False)
     
     def __repr__(self):
         return "<Seat map '{}'>".format(self.pk_bint_vechicle_id)
