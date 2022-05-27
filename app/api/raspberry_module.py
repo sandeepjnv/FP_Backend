@@ -4,10 +4,11 @@ from flask_restplus import Resource
 # schema 
 from app.schema import RaspberryModuleAPIs
 # service
-from app.service import image_frame_to_seat_map
+from app.service import image_frame_to_seat_map,save_vehicle_location
 
 ins_namespace = RaspberryModuleAPIs.ins_namespace
 ins_img_frame_request = RaspberryModuleAPIs.ins_img_frame_request
+ins_location_update_request = RaspberryModuleAPIs.ins_location_update_request
 
 @ins_namespace.route('/image_frame')
 class ImageFrame(Resource):
@@ -25,9 +26,9 @@ class ImageFrame(Resource):
 class LocationUpdate(Resource):
     @ins_namespace.doc("Current GEO location")
 
-    @ins_namespace.expect(ins_img_frame_request,validate = True)
+    @ins_namespace.expect(ins_location_update_request,validate = True)
     @ins_namespace.response(201, 'Location saved')
     @ins_namespace.doc('Update Current location')
     def post(self):
         """Update Current location""" 
-        return image_frame_to_seat_map(request)
+        return save_vehicle_location(request)
