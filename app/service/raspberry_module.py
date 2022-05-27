@@ -3,6 +3,7 @@ import cv2
 import argparse
 import numpy as np
 import base64
+from app import ins_db
 from app.model import SeatMap
 
 
@@ -113,9 +114,9 @@ def image_frame_to_seat_map(request):
         cv2.destroyAllWindows()
 
         # update seat map to DB
-        vehicle = SeatMap.query.filter_by(pk_bint_vechicle_id=str_vehicle_id).first()
+        vehicle = SeatMap.query.filter_by(vchr_username=str_vehicle_id).first()
         if vehicle:
-            vehicle.json_seat_map = json.dumps(objSeatMap)
+            vehicle.json_seat_map = objSeatMap
             save_changes(vehicle)
 
             return json.dumps({"status":"success"})
@@ -137,5 +138,5 @@ def get_output_layers(net):
     return output_layers
 
 def save_changes(data):
-    db.session.add(data)
-    db.session.commit()
+    ins_db.session.add(data)
+    ins_db.session.commit()
