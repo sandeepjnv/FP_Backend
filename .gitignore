@@ -1,6 +1,6 @@
 /venv/
 
 **/__pycache__
-**/data/
+**/data/**
 **/yolo/
 base64.txt
