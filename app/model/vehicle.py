@@ -13,6 +13,7 @@ class Vehicle(ins_db.Model):
     json_location = ins_db.Column(ins_db.JSON, nullable=True)
     json_seat_map = ins_db.Column(ins_db.JSON, nullable=True)
     vchr_name = ins_db.Column(ins_db.String, nullable= False)
+    int_direction = ins_db.Column(ins_db.Integer ,nullable = False)
     
     def __repr__(self):
         return "<Seat map '{}'>".format(self.vchr_name)
