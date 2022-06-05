@@ -117,7 +117,7 @@ def image_frame_to_seat_map(request):
         cv2.destroyAllWindows()
 
         # update seat map to DB
-        vehicle = Vehicle.query.filter_by(pk_bint_vehicle_id=str_vehicle_id).first()
+        vehicle = Vehicle.query.filter_by(pk_vchr_vehicle_id=str_vehicle_id).first()
         if vehicle:
             vehicle.json_seat_map = objSeatMap
             save_changes(vehicle)
