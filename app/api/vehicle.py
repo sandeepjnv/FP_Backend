@@ -4,11 +4,12 @@ from flask_restplus import Resource
 # schema 
 from app.schema import VehicleAPIs
 # service
-from app.service import get_all_buses , get_bus_detail
+from app.service import get_all_buses , get_bus_detail ,add_new_bus
 
 ins_namespace = VehicleAPIs.ins_namespace
 ins_list_all_vehicles = VehicleAPIs.ins_list_all_vehicles
 ins_vehicle_detail = VehicleAPIs.ins_vehicle_detail
+ins_new_bus = VehicleAPIs.ins_add_new_vehicle
 
 @ins_namespace.route('/list_all_vehicles')
 class ListAllVehicles(Resource):
@@ -31,3 +32,14 @@ class BusDetail(Resource):
     def post(self):
         """Get a vehicle detail""" 
         return get_bus_detail(request)
+
+@ins_namespace.route('/add_new_bus')
+class BusDetail(Resource):
+    @ins_namespace.doc("Add new bus")
+
+    @ins_namespace.expect(ins_new_bus,validate = True)
+    @ins_namespace.response(201, 'New bus detailed')
+    @ins_namespace.doc('Input vehicle details')
+    def post(self):
+        """Add new vehicle """ 
+        return add_new_bus(request)
