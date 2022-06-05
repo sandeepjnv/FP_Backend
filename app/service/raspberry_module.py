@@ -146,7 +146,7 @@ def save_vehicle_location(request):
         str_longitude = dct_request.get("str_longitude")
         str_latitude = dct_request.get("str_latitude")
 
-        vehicle = Vehicle.query.filter_by(pk_bint_vehicle_id=str_vehicle_id).first()
+        vehicle = Vehicle.query.filter_by(pk_vchr_vehicle_id=str_vehicle_id).first()
 
         if vehicle:
             vehicle.json_location = {"longitude":str_longitude,"str_latitude":str_latitude}
